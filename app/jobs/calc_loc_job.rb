@@ -1,9 +1,12 @@
 require 'fileutils'
 
 class CalcLocJob < ApplicationJob
+  include RedisMutex::Macro
+  auto_mutex :perform, on: [:username, :repository], block: 0
   queue_as :default
 
   def perform(username, repository)
+    FileUtils.rm_rf("tmp/repos/#{username}/#{repository}")
     # Do something later
     Git.clone(
       "https://github.com/#{username}/#{repository}.git",
@@ -19,6 +22,5 @@ class CalcLocJob < ApplicationJob
       "loc_#{username}#{repository}",
       repository: @repository
     )
-    FileUtils.rm_rf("tmp/repos/#{username}/#{repository}")
   end
 end

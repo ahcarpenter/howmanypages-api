@@ -117,6 +117,12 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     redis (3.3.3)
+    redis-classy (2.4.1)
+      redis-namespace (~> 1.0)
+    redis-mutex (4.0.0)
+      redis-classy (~> 2.0)
+    redis-namespace (1.5.3)
+      redis (~> 3.0, >= 3.0.4)
     rugged (0.25.1.1)
     sidekiq (4.2.10)
       concurrent-ruby (~> 1.0)
@@ -158,6 +164,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.1.0)
   redis (~> 3.0)
+  redis-mutex
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
